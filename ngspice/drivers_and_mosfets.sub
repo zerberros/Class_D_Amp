@@ -1,0 +1,55 @@
+Drivers and Mosfets
+
+********************************************************************************
+*    Descripcion: driver IR2010 MOSFETS filtro de salida y carga   
+*    Ultima modificacion:   28 febrero 2017
+********************************************************************************
+
+.INCLUDE lib/555_jai_model.sub
+.INCLUDE lib/third_party.lib
+.LIB  lib/IR2010_jai.sub IR2010LIB
+.LIB  generador_triangular.sub 555
+.LIB  generador_de_senales_PWM.sub FILTER_AND_PMW
+.lib  dead_time_v3.sub deadtime
+
+V1    vcc 0 15                                    ; alimentación de 
+V2    Vss 0 -15                                   ; circuito de señal
+V3    audio_in 0 SIN(0 2.3 1000 0 0)              ; y entrada de audio
+V4    VEE 0 100                                   ; Alimentacion de potencia
+V555 out_555 0 PULSE(5 10 0 2u 2u 1n 4u)
+
+*X_555 vcc out_555    TRIANGULAR_SIGNAL
+X_FILTER vcc vss out_555 audio_in trian_filt PWM_fase PWM_contrafase PRE_FILTER
+X_dead_time_A PWM_fase out1_A out2_A dead_time
+X_dead_time_B PWM_contrafase out1_B out2_B dead_time
+
+x_IR2010_A  out1_A out2_A HO_A LO_A VS_A 0 IR2010
+x_IR2010_B  out1_B out2_B HO_B LO_B VS_B 0 IR2010
+
+R15 HO_A ng_q4 10
+R16 LO_A ng_q5 10
+R17 HO_B ng_q6 10
+R18 LO_B ng_q7 10
+
+M_Q4 VEE  ng_q4 VS_A VS_A MOSFETN;IXFH36N55Q
+M_Q5 VS_A ng_q5 0    0    MOSFETN;IXFH36N55Q
+
+M_Q6 VEE  ng_q6 VS_B VS_B MOSFETN;IXFH36N55Q
+M_Q7 VS_B ng_q7 0    0    MOSFETN;IXFH36N55Q
+
+L1 VS_A speak_fase  35u
+
+L2 VS_B speak_contrafase 35u
+C6 speak_fase 0     100p
+C7 0 speak_contrafase    100p
+C8 speak_fase speak_contrafase 560p
+
+RL speak_fase speak_contrafase 8
+
+.model MOSFETN NMOS level=1 VTO=4.6 Kp = {2*14.4294} RD=0.19
+.control
+options interp ;reltol = 0.1 TRTOL=1 interp
+tran 10u 2014u 1014u uic
+plot V(speak_fase,speak_contrafase)
+.endc
+.end

@@ -1,0 +1,27 @@
+* Modelo IR2010 fulero
+
+
+V1 Hin 0 PULSE(15 0 0 1n 1n 5u 10u)
+V2 Lin 0 PULSE(0 15 0 1n 1n 5u 10u)
+V3 Vs 0 35
+         
+
+x_IR2010 HIN LIN HO LO VS 0 IR2010
+
+R1 Ho 0 10000
+R2 Lo 0 10000
+
+*.subckt IR2010 vdd  HIN SD LIN VSS HO VB VS VCC COM LO
+.LIB IR2010LIB
+.subckt IR2010 HIN LIN HO LO  VS  COM
+
+BE01 HO VS  V = V(HIN) > 7.5 ? 15 : 0
+BE02 LO COM V = V(LIN) > 7.5 ? 15 : 0
+
+
+.ends
+.ENDL
+.control
+tran 10n 20u
+.endc
+.end

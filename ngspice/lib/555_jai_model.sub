@@ -1,0 +1,38 @@
+
+
+
+
+.SUBCKT 555 GND TR OUT RS CT TH DIS VCC
+
+R1 VCC CT 80k
+R2 CT n001 80k
+R3 n001 GND 80k
+
+E_comp1 nresta GND vol='V(TH) > V(CT) ? 1 : 0'
+E_comp2 nseta GND vol='V(n001) > V(TR) ? 1 : 0'
+
+abridge1 [nresta] [nrestd] adc1
+abridge2 [nseta] [nsetd] adc1
+adridge3 [RS] [RSD] adc1
+anot RSD RSDN inv_
+
+alatch nsetd nrestd RSD nsetd nrestd outd noutd latch
+
+adac1 [noutd] [nouta] dac1
+adac2 [outd] [out] dac1
+
+S1 DIS GND nouta GND switch1 off
+
+
+.model switch1 sw vt=4 vh=0.5 ron=0.1 roff=100k
+
+
+.model latch d_srlatch(sr_delay=13.0e-9 enable_delay=22.0e-9
++   set_delay=25.0e-9 reset_delay=27.0e-9 ic=2
++   rise_delay=10.0e-9 fall_delay=3e-9) 
+.model inv_ d_inverter(rise_delay=0.5e-9 fall_delay=0.3e-9)
+.model adc1 adc_bridge(in_low=0.2 in_high=0.8)
+.model dac1 dac_bridge(out_low=0.2 out_high = 15 out_undef=0.7
++ t_rise=5e-9 t_fall=5e-9)
+.options reltol=0.0001
+.ENDS 

@@ -1,0 +1,49 @@
+.TITLE Filtro para la señal triangular
+
+.INCLUDE lib/third_party.lib
+
+V1	vcc 0 15
+V2	vss 0 -15
+V_s     trian_sig 0 PULSE(5 10 0 2u 2u 1n 4u) 
+V_a     audio_in 0 SIN(0 1.5 1000 0 0)
+
+X_filter vcc vss trian_sig audio_in out  PWM_pos PWM_neg PRE_FILTER
+.LIB FILTER_AND_PMW
+.SUBCKT PRE_FILTER vcc vss trian_sig audio_in trian_filt PWM_pos PWM_neg
+
+*AMP_OPE    no_inv      inv        vcc    vss    out        model
+X_TL084_1A  trian_sig   sig_OA1    vcc    vss    sig_OA1    TL084
+X_TL084_1B  0           no_inv2    vcc    vss    trian_filt TL084
+
+C03     sig_OA1    sig_OA1C     10n     IC=7.5       
+R7	sig_OA1C   no_inv2	12000
+R10	no_inv2    trian_filt	12000
+
+*AMP_OPE      no_inv      inv           vcc    vss    out           model
+X_TL084_1C    audio_in    audio_no_inv  vcc    vss    audio_no_inv  TL084   
+X_TL084_1D    0           OA_1D_no_inv  vcc    vss    audio_inv     TL084
+
+R8    audio_no_inv        OA_1D_no_inv    12000
+R9    OA_1D_no_inv        audio_inv	  12000
+
+X_LM319_A vcc trian_filt audio_no_inv PWM_pos LM319
+X_LM319_B vcc trian_filt audio_inv    PWM_neg LM319
+.ENDS
+
+.SUBCKT LM319 vcc v_no_inv v_inv out
+.param Vlow = 0
+E_LM319 out 0 Vol = V(v_no_inv) < V(v_inv) ? Vlow : V(Vcc)
+.ends
+
+.ENDL
+.control
+
+options ;RELTOL=0.00001
+tran 10n 10u uic
+plot trian_sig out
+
+tran 10n 100u uic
+
+plot audio_in out pwm_neg PWM_pos+0.1
+.endc
+.end

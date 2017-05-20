@@ -1,0 +1,6 @@
+set color0 = white
+set color1 = black
+set color2 = rgb:f/0/0
+set color3 = rgb:0/f/0
+set color4 = rgb:0/0/f
+set color5 = rgb:f/0/f

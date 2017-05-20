@@ -1,0 +1,57 @@
+* Generador de tiempos muertos para MOSFETS
+
+********************************************************************************
+*    Descripcion: Generador de tiempos muertos para poder atacar a los Mosfets.   
+********************************************************************************
+
+v_pwm pwm 0 pulse(15 0 0 1n 1n 5u 10u)
+
+x_dead_time PWM out1 out2 dead_time
+.lib deadtime
+.SUBCKT dead_time PWM out1 out2
+
+xschmitt1 pwm nodo1 schmitt_neg
+R1 nodo1 nodo2 2700 
+C1 nodo2 0 10p;100p
+xschmitt2 nodo2 nodo3 schmitt_neg
+
+xschmitt3 nodo1 nodo4  schmitt_neg
+R2 nodo4 nodo5 2700
+C2 nodo5 0    10p; 100p
+xschmitt4 nodo5 nodo6 schmitt_neg
+
+xand1 nodo3 nodo4  out1      and1
+xand2 nodo1 nodo6  out2      and1
+.ends
+
+.subckt schmitt_neg in out
+aschmitt in nb schmitt 
+xinversor3 nb out inversor
+.ends
+
+.subckt and1 in1 in2 out
+aadc_1 [in1] [in1d] adc
+aadc_2 [in2] [in2d] adc
+aand_1 [in1d in2d] dand and
+adac_1 [dand] [out] dac
+.ends
+
+.subckt inversor in out
+aadc_1 [in] [ind] adc
+anot_1 ind n_ind inverter
+adac_1 [n_ind] [out] dac
+.ends
+
+.model schmitt hyst(in_low=8.8 in_high=5.8 hyst=0 out_lower_limit=0.1 out_upper_limit=14.9)
+.model and d_and
+.model inverter d_inverter
+.model adc adc_bridge(in_low = 7.4 in_high=7.5)
+.model dac dac_bridge(out_low = 0.1 out_high=14.9 out_undef = 2.5)
+.endl
+.control
+
+tran 10n 20u
+plot pwm v(out1)+16  V(out2)+16.1
+
+.endc
+.end

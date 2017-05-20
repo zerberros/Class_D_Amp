@@ -1,0 +1,55 @@
+.TITLE Generador de onda triangular
+
+********************************************************************************
+*    Descripcion: Generador de señal triangular de 250kHz   
+*    a partir de un TCL555. Importante que sea TCL para altas frecuencias. 
+********************************************************************************
+
+.INCLUDE lib/555_jai_model.sub
+.INCLUDE lib/third_party.lib
+
+V1 vcc 0 15                                       ;Alimentacion					
+							
+X_triangular_signal vcc out TRIANGULAR_SIGNAL     ;Circuito
+
+.LIB 555
+.SUBCKT TRIANGULAR_SIGNAL vcc out_555             ;Subcircuito
+
+R1 n3 b_q1 4700
+R2 n3 b_q8 4700
+R3 c_q1 b_q2 5100
+R4 c_q1 b_q3 5100
+R5 k_d1 e_q2 750
+R6 e_q3 a_d2 750
+R7 n7 0 1000
+
+C01 n5 GND 15p IC=10
+C02 out_555 GND 1n IC=7.5
+
+*d_z1 b_q2 vcc     diode_z
+*d_z2 0    b_q3    diode_z
+
+a_zener1 b_q2 vcc dzener
+a_zener2 GND b_q3 dzener
+
+x_dio1 vcc k_d1 1N4148
+x_dio2 a_d2 GND 1N4148
+
+Q02 out_555 b_q2 e_q2 2N3906
+Q03 out_555 b_q3 e_q3 2N3904
+Q01 c_q1 b_q1 GND 2n3904                     
+Q08 c_q1 b_q8 vcc 2N3906
+
+x_555 GND out_555 n3 vcc n5 out_555 n7 vcc 555    ;modelo 555
+
+.ENDS                                             ;Fin Subcircuito
+
+.model diode_z D(Cjo=5p bv=3.6 Ibv=5m)
+.model dzener zener(v_breakdown=3.6 i_breakdown=0.005)
+.ENDL
+.control                                          ;control
+
+tran 10n 20u uic
+plot out
+.endc
+.end
