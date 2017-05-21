@@ -16,3 +16,5 @@ This is a very versatile prototype because with little changes you can get to mo
 Furthermore the output power depends on the voltage at the power supply and is limited mainly from the heat sinks and the MOSFETs themselves, so that it can also be adapted to different needs.
 
 Finally, it should be noted that this project does not deal with the construction of a complete audio system, this is only the power stage, and it is necessary to add a power supply, a preamplifier stage, and a kind of output formed by one or Several baffles with their corresponding Loudspeakers and passive filters.
+
+**Important** It is necessary to use version 4.0.6 of Kicad.
