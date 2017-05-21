@@ -32,7 +32,6 @@ LIBS:pspice
 LIBS:Power_Management
 LIBS:powerint
 LIBS:local
-LIBS:class_D_ampl-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -58,7 +57,7 @@ F4 "PWM_contrafase" O R 5300 4000 60
 F5 "triangular_signal" I L 3750 3550 60 
 $EndSheet
 $Comp
-L BNC P2
+L CONN_COAXIAL P2
 U 1 1 58710D34
 P 3400 4000
 F 0 "P2" H 3410 4120 50  0000 C CNN

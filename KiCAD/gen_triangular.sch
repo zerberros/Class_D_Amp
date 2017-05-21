@@ -32,7 +32,6 @@ LIBS:pspice
 LIBS:Power_Management
 LIBS:powerint
 LIBS:local
-LIBS:class_D_ampl-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -150,7 +149,7 @@ Wire Wire Line
 Connection ~ 6950 4050
 Connection ~ 6600 4050
 $Comp
-L ZENER Z2_3.6V1
+L D_Zener_ALT Z2_3.6V1
 U 1 1 583A2109
 P 7650 4750
 F 0 "Z2_3.6V1" H 7650 4850 50  0000 C CNN
@@ -161,7 +160,7 @@ F 3 "" H 7650 4750 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L ZENER Z1_3.6V1
+L D_Zener_ALT Z1_3.6V1
 U 1 1 583A2324
 P 7650 3450
 F 0 "Z1_3.6V1" H 7650 3550 50  0000 C CNN
@@ -174,7 +173,7 @@ $EndComp
 Wire Wire Line
 	7400 4350 7850 4350
 Wire Wire Line
-	7650 4550 7650 4350
+	7650 4350 7650 4600
 Connection ~ 7650 4350
 $Comp
 L GND #PWR027
@@ -188,9 +187,9 @@ F 3 "" H 7650 5050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7650 5050 7650 4950
+	7650 4900 7650 5050
 Wire Wire Line
-	7650 3650 7650 3750
+	7650 3600 7650 3750
 Wire Wire Line
 	7400 3750 7850 3750
 Connection ~ 7650 3750
@@ -313,7 +312,7 @@ F 3 "" H 8150 2800 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7650 3250 7650 3150
+	7650 3150 7650 3300
 Wire Wire Line
 	8150 2850 8150 2800
 Wire Wire Line
