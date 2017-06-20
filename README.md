@@ -18,3 +18,7 @@ Furthermore the output power depends on the voltage at the power supply and is l
 Finally, it should be noted that this project does not deal with the construction of a complete audio system, this is only the power stage, and it is necessary to add a power supply, a preamplifier stage, and a kind of output formed by one or Several baffles with their corresponding Loudspeakers and passive filters.
 
 **Important** It is necessary to use version 4.0.6 of Kicad.
+
+### Documentation in progress 
+see ![wiki](https://github.com/zerberros/Class_D_Amp/wiki)
+
