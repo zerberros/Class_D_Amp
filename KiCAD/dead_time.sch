@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:class_D_ampl-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,7 +37,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 5
+Sheet 4 6
 Title "Generador de tiempos muertos"
 Date "2017-02-21"
 Rev "0.2"

@@ -28,6 +28,9 @@ R9    OA_1D_no_inv        audio_inv	  12000
 
 X_LM319_A vcc trian_filt audio_no_inv PWM_pos LM319
 X_LM319_B vcc trian_filt audio_inv    PWM_neg LM319
+
+*X_LM319_A trian_filt audio_no_inv  vcc vss PWM_pos LMX19
+*X_LM319_B trian_filt audio_inv     vcc vss PWM_neg LMX19
 .ENDS
 
 .SUBCKT LM319 vcc v_no_inv v_inv out

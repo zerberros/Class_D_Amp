@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:class_D_ampl-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,7 +37,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 5
+Sheet 1 6
 Title "Esquéma general"
 Date "2017-02-21"
 Rev "0.2"
@@ -57,7 +58,7 @@ F4 "PWM_contrafase" O R 5300 4000 60
 F5 "triangular_signal" I L 3750 3550 60 
 $EndSheet
 $Comp
-L CONN_COAXIAL P2
+L Conn_Coaxial P2
 U 1 1 58710D34
 P 3400 4000
 F 0 "P2" H 3410 4120 50  0000 C CNN
@@ -121,11 +122,11 @@ Wire Wire Line
 Text Notes 1800 3100 0    120  ~ 0
 Generador de \nseñal triangular
 $Sheet
-S 1950 3350 1050 950 
+S 1550 1500 1050 950 
 U 587106D2
 F0 " " 60
 F1 "gen_triangular.sch" 60
-F2 "triangular_signal" O R 3000 3550 60 
+F2 "triangular_signal" O R 2600 1700 60 
 $EndSheet
 Text Notes 3750 3150 0    120  ~ 0
 Generador de \nseñales PWM
@@ -133,4 +134,11 @@ Text Notes 5750 3150 0    120  ~ 0
 Generador de \ntiempos muertos
 Text Notes 8150 3150 0    120  ~ 0
 Drivers y \nMOSFETS de potencia
+$Sheet
+S 1400 3300 1600 1050
+U 5A2D865D
+F0 "generador triangular" 60
+F1 "new_gen_triangular.sch" 60
+F2 "triangular_signal" O R 3000 3550 60 
+$EndSheet
 $EndSCHEMATC

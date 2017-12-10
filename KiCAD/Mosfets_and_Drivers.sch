@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:class_D_ampl-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,7 +37,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 5
+Sheet 3 6
 Title "Mosfets y Drivers"
 Date "2017-02-21"
 Rev "0.2"
@@ -352,7 +353,7 @@ F 3 "" H 3750 3550 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P4
+L Conn_01x01 P4
 U 1 1 58A3490B
 P 6150 1900
 F 0 "P4" H 6150 2000 50  0000 C CNN
@@ -516,7 +517,7 @@ Wire Wire Line
 Wire Wire Line
 	4650 3500 5850 3500
 $Comp
-L CONN_01X01 P3
+L Conn_01x01 P3
 U 1 1 58A34F5A
 P 6450 5350
 F 0 "P3" H 6450 5450 50  0000 C CNN
@@ -654,7 +655,7 @@ F 3 "" H 6650 3700 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P5
+L Conn_01x01 P5
 U 1 1 58BEC477
 P 8100 2850
 F 0 "P5" H 8100 2950 50  0000 C CNN
@@ -665,7 +666,7 @@ F 3 "" H 8100 2850 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X01 P6
+L Conn_01x01 P6
 U 1 1 58BEC673
 P 8150 4700
 F 0 "P6" H 8150 4800 50  0000 C CNN

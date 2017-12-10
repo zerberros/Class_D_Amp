@@ -1,0 +1,63 @@
+.TITLE Nuevo generador de señal triangular
+
+********************************************************************************
+*    Descripcion: Generador de señal triangular de 250kHz   
+*     
+********************************************************************************
+
+.INCLUDE lib/third_party.lib
+
+V1 vcc 0 15 
+
+XGT vcc out TRIANGULAR_SIGNAL
+
+.SUBCKT TRIANGULAR_SIGNAL vcc out
+
+XD1  vcc n1     1N4148
+*XD1b n1b n1     1N4148
+XD2  n1  n2     1N4148
+R1   n2  n3     1000
+XD3  n3  n4     1N4148
+*XD35 n4b n4     1N4148
+XD4  n4  0      1N4148
+
+
+RPOT1 vcc n5    1
+R2   n5  n6     120
+QBJT1 n7 n2 n6  2N3906
+QBJT2 n8 n3 n9  2N3904
+R3   n9  n10    120
+RPOT2 n10 0     1
+
+XD5  n7  nsc    1N4148
+XD6  n7  nVC    1N4148
+XD7  nsc n8     1N4148
+XD8  nVC n8     1N4148
+
+C1   nVC 0      1n
+
+R4  vcc  n11    3k
+R5  n11  nsc    2k
+R6  n11  0      3k
+
+XTL084_1 n11 nVC vcc 0 nsc TL084
+*XLM319   vcc n11 nVC nsc LM319_Jai
+
+XTL084_2 nVc out vcc 0 out TL084
+
+.ENDS                          ; FIN SUBCIRCUITO
+
+.SUBCKT LM319_Jai vcc v_no_inv v_inv out
+.param Vlow = 0
+E_LM319 out 0 Vol = V(v_no_inv) < V(v_inv) ? Vlow : V(Vcc)
+.ends
+
+
+.control
+
+tran 60n 3000u uic
+plot out xgt.nsc xgt.n7 xgt.n8 xgt.n11 
+plot xgt.nvc xgt.n11 xgt.nsc
+plot out
+.endc
+.end

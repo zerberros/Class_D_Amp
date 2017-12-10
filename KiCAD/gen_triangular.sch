@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:class_D_ampl-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,7 +37,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 5
+Sheet 5 6
 Title "Generador de señal triangular"
 Date "2017-02-21"
 Rev "0.2"
@@ -396,7 +397,7 @@ F 3 "" H 1050 1450 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L CONN_01X03 P1
+L Conn_01x03 P1
 U 1 1 58A33689
 P 1500 1450
 F 0 "P1" H 1500 1650 50  0000 C CNN
